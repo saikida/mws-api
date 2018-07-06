@@ -1,0 +1,12 @@
+{
+    "name": "saikida/mwsapi",
+    "description": "template type is custom ,csv version is 20180108.",
+    "type": "library",
+    "authors": [
+        {
+            "name": "caiweiling",
+            "email": "caiweiling@aliyun.com"
+        }
+    ],
+    "require": {}
+}
