@@ -1,6 +1,7 @@
 {
     "name": "saikida/mwsapi",
     "description": "template type is custom ,csv version is 20180108.",
+    "license":"MIT",
     "type": "library",
     "authors": [
         {
