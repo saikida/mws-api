@@ -3,7 +3,7 @@ namespace SKA;
 
 use Exception;
 
-class MWSEndPoint{
+class SKAEndPoint{
 
     public static $endpoints = [
         'ListRecommendations' => [

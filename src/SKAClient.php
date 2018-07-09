@@ -12,12 +12,12 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use Spatie\ArrayToXml\ArrayToXml;
 
-class MWSClient{
+class SKAEndPoint{
 
     const SIGNATURE_METHOD = 'HmacSHA256';
     const SIGNATURE_VERSION = '2';
     const DATE_FORMAT = "Y-m-d\TH:i:s.\\0\\0\\0\\Z";
-    const APPLICATION_NAME = 'MCS/MwsClient';
+    const APPLICATION_NAME = 'MCS/SKAEndPoint';
 
     private $config = [
         'Seller_Id' => null,
