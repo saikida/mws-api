@@ -3,7 +3,7 @@ namespace SKA;
 
 use Exception;
 
-class MWSProduct{
+class SKAEndPoint{
 
     public $sku;
     public $price;
