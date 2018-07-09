@@ -1,5 +1,5 @@
 <?php
-namespace MCS;
+namespace SKA;
 
 use DateTime;
 use Exception;
