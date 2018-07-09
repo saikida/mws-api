@@ -1,9 +1,9 @@
 <?php 
-namespace SKA;
+namespace MCS;
 
 use Exception;
 
-class SKAEndPoint{
+class MWSProduct{
 
     public $sku;
     public $price;

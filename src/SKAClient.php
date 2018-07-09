@@ -1,10 +1,10 @@
 <?php
-namespace SKA;
+namespace MCS;
 
 use DateTime;
 use Exception;
 use DateTimeZone;
-use SKA\MWSEndPoint;
+use MCS\MWSEndPoint;
 use League\Csv\Reader;
 use League\Csv\Writer;
 use SplTempFileObject;
@@ -12,12 +12,12 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use Spatie\ArrayToXml\ArrayToXml;
 
-class SKAClient{
+class MWSClient{
 
     const SIGNATURE_METHOD = 'HmacSHA256';
     const SIGNATURE_VERSION = '2';
     const DATE_FORMAT = "Y-m-d\TH:i:s.\\0\\0\\0\\Z";
-    const APPLICATION_NAME = 'SKA/SKAEndPoint';
+    const APPLICATION_NAME = 'MCS/MwsClient';
 
     private $config = [
         'Seller_Id' => null,
@@ -41,7 +41,7 @@ class SKAClient{
         'A1VC38T7YXB528' => 'mws.amazonservices.jp',
         'AAHKV2X7AFYLW' => 'mws.amazonservices.com.cn',
         'A39IBJ37TRP1C6' => 'mws.amazonservices.com.au',
-	    'A2Q3Y263D00KWC' => 'mws.amazonservices.com'
+    'A2Q3Y263D00KWC' => 'mws.amazonservices.com'
     ];
 
     protected $debugNextFeed = false;
@@ -647,11 +647,11 @@ class SKAClient{
                         }
                         if (isset($product['Relationships']['VariationParent']['Identifiers']['MarketplaceASIN']['ASIN'])) {
                             $array['Parentage'] = 'child';
-			    $array['Relationships'] = $product['Relationships']['VariationParent']['Identifiers']['MarketplaceASIN']['ASIN'];
+                $array['Relationships'] = $product['Relationships']['VariationParent']['Identifiers']['MarketplaceASIN']['ASIN'];
                         }
-			if (isset($product['Relationships']['VariationChild'])) {
-		            $array['Parentage'] = 'parent';
-	                }
+            if (isset($product['Relationships']['VariationChild'])) {
+                    $array['Parentage'] = 'parent';
+                    }
                         if (isset($product['SalesRankings']['SalesRank'])) {
                             $array['SalesRank'] = $product['SalesRankings']['SalesRank'];
                         }
@@ -895,9 +895,10 @@ class SKAClient{
         $csv->setInputEncoding('iso-8859-1');
 
         $csv->insertOne(['TemplateType=Custom', 'Version=2018.0108']);
-     //   $csv->insertOne(['TemplateType=Offer', 'Version=2014.0703']);
+
         $header = ['item_type','item_sku','external_product_id','external_product_id_type','brand_name','item_name','manufacturer','part_number','color_name','color_map','department_name','standard_price','quantity','merchant_shipping_group_name'];
-//        $header = ['item_type','item_sku','external_product_id','external_product_id_type','brand_name','item_name','manufacturer','part_number','color_name','color_map','department_name','standard_price','quanitity','merchant_shipping_group_name','main_image_url','other_image_url1','other_image_url2','other_image_url3','swatch_image_url','main_offer_image','offer_image'];
+        //   $csv->insertOne(['TemplateType=Offer', 'Version=2014.0703']);
+        //        $header = ['item_type','item_sku','external_product_id','external_product_id_type','brand_name','item_name','manufacturer','part_number','color_name','color_map','department_name','standard_price','quanitity','merchant_shipping_group_name','main_image_url','other_image_url1','other_image_url2','other_image_url3','swatch_image_url','main_offer_image','offer_image'];
 //        $header = ['sku', 'price', 'quantity', 'product-id',
 //            'product-id-type', 'condition-type', 'condition-note',
 //            'ASIN-hint', 'title', 'product-tax-code', 'operation-type',
@@ -968,8 +969,8 @@ class SKAClient{
             return $feedContent;
         }
 
-	$purgeAndReplace = isset($options['PurgeAndReplace']) ? $options['PurgeAndReplace'] : false;
-	    
+    $purgeAndReplace = isset($options['PurgeAndReplace']) ? $options['PurgeAndReplace'] : false;
+        
         $query = [
             'FeedType' => $FeedType,
             'PurgeAndReplace' => ($purgeAndReplace ? 'true' : 'false'),
@@ -1108,42 +1109,42 @@ class SKAClient{
     }
     
     /**
-	 * Get a list's inventory for Amazon's fulfillment
-	 *
-	 * @param array $sku_array
-	 *
-	 * @return array
-	 * @throws Exception
-	 */
+     * Get a list's inventory for Amazon's fulfillment
+     *
+     * @param array $sku_array
+     *
+     * @return array
+     * @throws Exception
+     */
     public function ListInventorySupply($sku_array = []){
-	
-	    if (count($sku_array) > 50) {
-		    throw new Exception('Maximum amount of SKU\'s for this call is 50');
-	    }
-	
-	    $counter = 1;
-	    $query = [
-		    'MarketplaceId' => $this->config['Marketplace_Id']
-	    ];
-	
-	    foreach($sku_array as $key){
-		    $query['SellerSkus.member.' . $counter] = $key;
-		    $counter++;
-	    }
-	
-	    $response = $this->request(
-		    'ListInventorySupply',
-		    $query
-	    );
-	
-	    $result = [];
-	    if (isset($response['ListInventorySupplyResult']['InventorySupplyList']['member'])) {
-		    foreach ($response['ListInventorySupplyResult']['InventorySupplyList']['member'] as $index => $ListInventorySupplyResult) {
-			    $result[$index] = $ListInventorySupplyResult;
-		    }
-	    }
-	    
-	    return $result;
+    
+        if (count($sku_array) > 50) {
+            throw new Exception('Maximum amount of SKU\'s for this call is 50');
+        }
+    
+        $counter = 1;
+        $query = [
+            'MarketplaceId' => $this->config['Marketplace_Id']
+        ];
+    
+        foreach($sku_array as $key){
+            $query['SellerSkus.member.' . $counter] = $key;
+            $counter++;
+        }
+    
+        $response = $this->request(
+            'ListInventorySupply',
+            $query
+        );
+    
+        $result = [];
+        if (isset($response['ListInventorySupplyResult']['InventorySupplyList']['member'])) {
+            foreach ($response['ListInventorySupplyResult']['InventorySupplyList']['member'] as $index => $ListInventorySupplyResult) {
+                $result[$index] = $ListInventorySupplyResult;
+            }
+        }
+        
+        return $result;
     }
 
     /**
@@ -1152,7 +1153,7 @@ class SKAClient{
     private function request($endPoint, array $query = [], $body = null, $raw = false)
     {
 
-        $endPoint = SKAEndPoint::get($endPoint);
+        $endPoint = MWSEndPoint::get($endPoint);
 
         $merge = [
             'Timestamp' => gmdate(self::DATE_FORMAT, time()),
