@@ -7,7 +7,6 @@ class MWSProduct{
 
     public $sku;
     public $price;
-    public $quantity = 0;
     public $product_id;
     public $product_id_type;
     public $condition_type = 'New';
@@ -24,12 +23,56 @@ class MWSProduct{
     public $is_giftwrap_available='';
     public $is_gift_message_available='';
     public $fulfillment_center_id='';
-    public $main_offer_image='';
     public $offer_image1='';
     public $offer_image2='';
     public $offer_image3='';
     public $offer_image4='';
     public $offer_image5='';
+
+    //2018版本的
+    public $item_type;        //分类
+    public $item_sku;         //sku名
+    public $external_product_id; //UPC码
+    public $external_product_id_type; //UPC ASIN
+    public $brand_name; //品牌名
+    public $item_name; //节点名
+    public $manufacturer; //节点名
+    public $part_number; //节点名
+    public $color_name; //节点名
+    public $color_map; //节点名
+    public $department_name; //节点名
+    public $standard_price; //节点名
+    public $quantity; //节点名
+    public $merchant_shipping_group_name; //节点名
+    public $main_image_url;
+    public $other_image_url1;
+    public $other_image_url2;
+    public $other_image_url3;
+    public $swatch_image_url;
+    public $main_offer_image;
+    public $offer_image;
+    public $parent_child;
+    public $parent_sku;
+    public $relationship_type;
+    public $variation_theme;
+    public $product_description;
+    public $feed_product_type;
+    public $model;
+    public $update_delete;
+    public $bullet_point1;
+    public $bullet_point2;
+    public $bullet_point3;
+    public $bullet_point4;
+    public $bullet_point5;
+    public $generic_keywords1; //关键词
+    public $generic_keywords2;
+    public $generic_keywords3;
+    public $generic_keywords4;
+    public $generic_keywords5;
+    public $subject_character;
+    public $size_name;
+
+
 
     private $validation_errors = [];
     
@@ -52,96 +95,95 @@ class MWSProduct{
     
     public function toArray()
     {
-
         return [
-            'item_type'=>'basic-multipurpose-backpacks',
-            'item_sku'=>'kincustom1109',
-            'external_product_id'=>'796914760511',
-            'external_product_id_type'=>'UPC',
-            'brand_name'=>'Etype',
-            'item_name'=>'Etype Unisex 3D Art Cat Canvas School Backpack Casual Student College Daypacks for Boys and Girls Cat1',
-            'manufacturer'=>'Etype',
-            'part_number'=>'',
-            'color_name'=>'White',
-            'color_map'=>'White',
-            'department_name'=>'',
-            'standard_price'=>'22.89',
-            'quantity'=>'',
-            'merchant_shipping_group_name'=>''
+            'item_type'=>$this->item_type,
+            'item_sku'=>$this->item_sku,
+            'external_product_id'=>$this->external_product_id,
+            'external_product_id_type'=>$this->external_product_id_type,
+            'brand_name'=>$this->brand_name,
+            'item_name'=>$this->item_name,
+            'manufacturer'=>$this->manufacturer,
+            'part_number'=>$this->part_number,
+            'color_name'=>$this->color_name,
+            'color_map'=>$this->color_map,
+            'department_name'=>$this->department_name,
+            'standard_price'=>$this->standard_price,
+            'quantity'=>$this->quantity,
+            'merchant_shipping_group_name'=>$this->merchant_shipping_group_name,
+            'main_image_url'=>$this->main_image_url,
+            'other_image_url1'=>$this->other_image_url1,
+            'other_image_url2'=>$this->other_image_url2,
+            'other_image_url3'=>$this->other_image_url3,
+            'swatch_image_url'=>$this->swatch_image_url,
+            'main_offer_image'=>$this->main_offer_image,
+            'offer_image'=>$this->offer_image,
+            'parent_child'=>$this->parent_child,
+            'parent_sku'=>$this->parent_sku,
+            'relationship_type'=>$this->relationship_type,
+            'variation_theme'=>$this->variation_theme,
+            'product_description'=>$this->product_description,
+            'feed_product_type'=>$this->feed_product_type,
+            'model'=>$this->model,
+            'update_delete'=>$this->update_delete,
+            'bullet_point1'=>$this->bullet_point1,
+            'bullet_point2'=>$this->bullet_point2,
+            'bullet_point3'=>$this->bullet_point3,
+            'bullet_point4'=>$this->bullet_point4,
+            'bullet_point5'=>$this->bullet_point5,
+            'generic_keywords1'=>$this->generic_keywords1,
+            'generic_keywords2'=>$this->generic_keywords2,
+            'generic_keywords3'=>$this->generic_keywords3,
+            'generic_keywords4'=>$this->generic_keywords4,
+            'generic_keywords5'=>$this->generic_keywords5,
+            'subject_character'=>$this->subject_character,
+            'size_name'=>$this->size_name,
         ];
-//        return [
-//            'sku' => $this->sku,
-//            'price' => $this->price,
-//            'quantity' => $this->quantity,
-//            'product_id' => $this->product_id,
-//            'product_id_type' => $this->product_id_type,
-//            'condition_type' => $this->condition_type,
-//            'condition_note' => $this->condition_note,
-//            'ASIN_hint' => $this->ASIN_hint,
-//            'title'=>$this->title,
-//            'product_tax_code'=>$this->product_tax_code,
-//            'operation_type'=>$this->operation_type,
-//            'sale_price'=>$this->sale_price,
-//            'sale_start_date'=>$this->sale_start_date,
-//            'sale_end_date'=>$this->sale_end_date,
-//            'leadtime_to_ship'=>$this->leadtime_to_ship,
-//            'launch_date'=>$this->launch_date,
-//            'is_giftwrap_available'=>$this->is_giftwrap_available,
-//            'is_gift_message_available'=>$this->is_gift_message_available,
-//            'fulfillment_center_id'=>$this->fulfillment_center_id,
-//            'main_offer_image'=>$this->main_offer_image,
-//            'offer_image1'=>$this->offer_image1,
-//            'offer_image2'=>$this->offer_image2,
-//            'offer_image3'=>$this->offer_image3,
-//            'offer_image4'=>$this->offer_image4,
-//            'offer_image5'=>$this->offer_image5,
-//        ];
     }
 
     
     public function validate()
     {
-        if (mb_strlen($this->sku) < 1 or strlen($this->sku) > 40) {
-            $this->validation_errors['sku'] = 'Should be longer then 1 character and shorter then 40 characters';
+        if (mb_strlen($this->item_sku) < 1 or strlen($this->item_sku) > 40) {
+            $this->validation_errors['item_sku'] = 'Should be longer then 1 character and shorter then 40 characters';
         }
         
-        $this->price = str_replace(',', '.', $this->price);
+        $this->standard_price = str_replace(',', '.', $this->standard_price);
         
-        $exploded_price = explode('.', $this->price);
+        $exploded_price = explode('.', $this->standard_price);
         
         if (count($exploded_price) == 2) {
             if (mb_strlen($exploded_price[0]) > 18) { 
-                $this->validation_errors['price'] = 'Too high';        
+                $this->validation_errors['standard_price'] = 'Too high';
             } else if (mb_strlen($exploded_price[1]) > 2) {
-                $this->validation_errors['price'] = 'Too many decimals';    
+                $this->validation_errors['standard_price'] = 'Too many decimals';
             }
         } else {
-            $this->validation_errors['price'] = 'Looks wrong';        
+            $this->validation_errors['standard_price'] = 'Looks wrong';
         }
         
         $this->quantity = (int) $this->quantity;
-        $this->product_id = (string) $this->product_id;
+        $this->external_product_id = (string) $this->external_product_id;
         
-        $product_id_length = mb_strlen($this->product_id);
+        $product_id_length = mb_strlen($this->external_product_id);
         
-        switch ($this->product_id_type) {
+        switch ($this->external_product_id_type) {
             case 'ASIN':
                 if ($product_id_length != 10) {
-                    $this->validation_errors['product_id'] = 'ASIN should be 10 characters long';                
+                    $this->validation_errors['external_product_id'] = 'ASIN should be 10 characters long';
                 }
                 break;
             case 'UPC':
                 if ($product_id_length != 12) {
-                    $this->validation_errors['product_id'] = 'UPC should be 12 characters long';                
+                    $this->validation_errors['external_product_id'] = 'UPC should be 12 characters long';
                 }
                 break;
             case 'EAN':
                 if ($product_id_length != 13) {
-                    $this->validation_errors['product_id'] = 'EAN should be 13 characters long';                
+                    $this->validation_errors['external_product_id'] = 'EAN should be 13 characters long';
                 }
                 break;
             default:
-               $this->validation_errors['product_id_type'] = 'Not one of: ASIN,UPC,EAN';        
+               $this->validation_errors['external_product_id_type'] = 'Not one of: ASIN,UPC,EAN';
         }
         
         if (!in_array($this->condition_type, $this->conditions)) {

@@ -41,7 +41,7 @@ class MWSClient{
         'A1VC38T7YXB528' => 'mws.amazonservices.jp',
         'AAHKV2X7AFYLW' => 'mws.amazonservices.com.cn',
         'A39IBJ37TRP1C6' => 'mws.amazonservices.com.au',
-    'A2Q3Y263D00KWC' => 'mws.amazonservices.com'
+        'A2Q3Y263D00KWC' => 'mws.amazonservices.com'
     ];
 
     protected $debugNextFeed = false;
@@ -885,9 +885,9 @@ class MWSClient{
      */
     public function postProduct($MWSProduct) {
 
-        if (!is_array($MWSProduct)) {
-            $MWSProduct = [$MWSProduct];
-        }
+//        if (!is_array($MWSProduct)) {
+//            $MWSProduct = [$MWSProduct];
+//        }
 
         $csv = Writer::createFromFileObject(new SplTempFileObject());
 
@@ -896,7 +896,50 @@ class MWSClient{
 
         $csv->insertOne(['TemplateType=Custom', 'Version=2018.0108']);
 
-        $header = ['item_type','item_sku','external_product_id','external_product_id_type','brand_name','item_name','manufacturer','part_number','color_name','color_map','department_name','standard_price','quantity','merchant_shipping_group_name'];
+
+        $header = [
+            'item_type',
+            'item_sku',
+            'external_product_id',
+            'external_product_id_type',
+            'brand_name',
+            'item_name',
+            'manufacturer',
+            'part_number',
+            'color_name',
+            'color_map',
+            'department_name',
+            'standard_price',
+            'quantity',
+            'merchant_shipping_group_name',
+            'main_image_url',
+            'other_image_url1',
+            'other_image_url2',
+            'other_image_url3',
+            'swatch_image_url',
+            'main_offer_image',
+            'offer_image',
+            'parent_child',
+            'parent_sku',
+            'relationship_type',
+            'variation_theme',
+            'product_description',
+            'feed_product_type',
+            'model',
+            'update_delete',
+            'bullet_point1',
+            'bullet_point2',
+            'bullet_point3',
+            'bullet_point4',
+            'bullet_point5',
+            'generic_keywords1',
+            'generic_keywords2',
+            'generic_keywords3',
+            'generic_keywords4',
+            'generic_keywords5',
+            'subject_character',
+            'size_name'
+        ];
         //   $csv->insertOne(['TemplateType=Offer', 'Version=2014.0703']);
         //        $header = ['item_type','item_sku','external_product_id','external_product_id_type','brand_name','item_name','manufacturer','part_number','color_name','color_map','department_name','standard_price','quanitity','merchant_shipping_group_name','main_image_url','other_image_url1','other_image_url2','other_image_url3','swatch_image_url','main_offer_image','offer_image'];
 //        $header = ['sku', 'price', 'quantity', 'product-id',
