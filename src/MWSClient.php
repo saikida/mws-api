@@ -4,7 +4,7 @@ namespace SKA;
 use DateTime;
 use Exception;
 use DateTimeZone;
-use MCS\MWSEndPoint;
+use SKA\MWSEndPoint;
 use League\Csv\Reader;
 use League\Csv\Writer;
 use SplTempFileObject;
