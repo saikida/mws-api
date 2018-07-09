@@ -17,7 +17,7 @@ class SKAEndPoint{
     const SIGNATURE_METHOD = 'HmacSHA256';
     const SIGNATURE_VERSION = '2';
     const DATE_FORMAT = "Y-m-d\TH:i:s.\\0\\0\\0\\Z";
-    const APPLICATION_NAME = 'MCS/SKAEndPoint';
+    const APPLICATION_NAME = 'SKA/SKAEndPoint';
 
     private $config = [
         'Seller_Id' => null,
@@ -1152,7 +1152,7 @@ class SKAEndPoint{
     private function request($endPoint, array $query = [], $body = null, $raw = false)
     {
 
-        $endPoint = MWSEndPoint::get($endPoint);
+        $endPoint = SKAEndPoint::get($endPoint);
 
         $merge = [
             'Timestamp' => gmdate(self::DATE_FORMAT, time()),
