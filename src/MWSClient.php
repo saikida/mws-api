@@ -883,7 +883,7 @@ class MWSClient{
      * @param  object $MWSProduct or array of MWSProduct objects
      * @return array
      */
-    public function postProduct($MWSProduct) {
+    public function postProduct($MWSProduct,$template="knits_tees_womens") {
 
 //        if (!is_array($MWSProduct)) {
 //            $MWSProduct = [$MWSProduct];
@@ -894,52 +894,63 @@ class MWSClient{
         $csv->setDelimiter("\t");
         $csv->setInputEncoding('iso-8859-1');
 
-        $csv->insertOne(['TemplateType=Custom', 'Version=2018.0108']);
+        switch($template){
+            case "knits_tees_womens";
+                $csv->insertOne(['TemplateType=fptcustom', 'Version=2018.0711']);
+                $header=['feed_product_type','item_sku','brand_name','item_name','external_product_id','external_product_id_type','item_type','outer_material_type1','outer_material_type2','outer_material_type3','outer_material_type4','outer_material_type5','color_name','color_map','size_name','size_map','is_adult_product','material_composition1','material_composition2','material_composition3','material_composition4','material_composition5','material_composition6','material_composition7','material_composition8','material_composition9','material_composition10','department_name','standard_price','quantity','merchant_shipping_group_name','main_image_url','other_image_url1','other_image_url2','other_image_url3','parent_child','parent_sku','relationship_type','variation_theme','update_delete','product_description','closure_type','model','part_number','manufacturer','bullet_point1','bullet_point2','bullet_point3','bullet_point4','bullet_point5','generic_keywords1','generic_keywords2','generic_keywords3','generic_keywords4','generic_keywords5','fit_type','neck_size','neck_size_unit_of_measure','neck_style','special_size_type','theme','material_type','website_shipping_weight','website_shipping_weight_unit_of_measure','item_length','item_width','item_height','item_dimensions_unit_of_measure','fulfillment_center_id','package_height','package_width','package_length','package_weight','package_weight_unit_of_measure','package_dimensions_unit_of_measure','cpsia_cautionary_statement','cpsia_cautionary_description','fabric_type','import_designation','item_weight_unit_of_measure','item_weight','country_of_origin','batteries_required','are_batteries_included','battery_cell_composition','battery_type1','battery_type2','battery_type3','number_of_batteries1','number_of_batteries2','number_of_batteries3','battery_weight','battery_weight_unit_of_measure','number_of_lithium_metal_cells','number_of_lithium_ion_cells','lithium_battery_packaging','lithium_battery_energy_content','lithium_battery_energy_content_unit_of_measure','lithium_battery_weight','lithium_battery_weight_unit_of_measure','supplier_declared_dg_hz_regulation1','supplier_declared_dg_hz_regulation2','supplier_declared_dg_hz_regulation3','supplier_declared_dg_hz_regulation4','supplier_declared_dg_hz_regulation5','hazmat_united_nations_regulatory_id','safety_data_sheet_url','item_volume','item_volume_unit_of_measure','flash_point','ghs_classification_class1','ghs_classification_class2','ghs_classification_class3','california_proposition_65_compliance_type','california_proposition_65_chemical_names1','california_proposition_65_chemical_names2','california_proposition_65_chemical_names3','california_proposition_65_chemical_names4','california_proposition_65_chemical_names5','list_price','condition_type','condition_note','product_tax_code','fulfillment_latency','product_site_launch_date','merchant_release_date','restock_date','sale_price','sale_from_date','sale_end_date','offering_end_date','max_aggregate_ship_quantity','item_package_quantity','number_of_items','offering_can_be_gift_messaged','offering_can_be_giftwrapped','is_discontinued_by_manufacturer','missing_keyset_reason','max_order_quantity','offering_start_date'];
+                break;
+            default:
+                $csv->insertOne(['TemplateType=Custom', 'Version=2018.0108']);
+                $header = [
+                    'item_type',
+                    'item_sku',
+                    'external_product_id',
+                    'external_product_id_type',
+                    'brand_name',
+                    'item_name',
+                    'manufacturer',
+                    'part_number',
+                    'color_name',
+                    'color_map',
+                    'department_name',
+                    'standard_price',
+                    'quantity',
+                    'merchant_shipping_group_name',
+                    'main_image_url',
+                    'other_image_url1',
+                    'other_image_url2',
+                    'other_image_url3',
+                    'swatch_image_url',
+                    'main_offer_image',
+                    'offer_image',
+                    'parent_child',
+                    'parent_sku',
+                    'relationship_type',
+                    'variation_theme',
+                    'product_description',
+                    'feed_product_type',
+                    'model',
+                    'update_delete',
+                    'bullet_point1',
+                    'bullet_point2',
+                    'bullet_point3',
+                    'bullet_point4',
+                    'bullet_point5',
+                    'generic_keywords1',
+                    'generic_keywords2',
+                    'generic_keywords3',
+                    'generic_keywords4',
+                    'generic_keywords5',
+                    'subject_character',
+                    'size_name'
+                ];
+                break;
 
 
-        $header = [
-            'item_type',
-            'item_sku',
-            'external_product_id',
-            'external_product_id_type',
-            'brand_name',
-            'item_name',
-            'manufacturer',
-            'part_number',
-            'color_name',
-            'color_map',
-            'department_name',
-            'standard_price',
-            'quantity',
-            'merchant_shipping_group_name',
-            'main_image_url',
-            'other_image_url1',
-            'other_image_url2',
-            'other_image_url3',
-            'swatch_image_url',
-            'main_offer_image',
-            'offer_image',
-            'parent_child',
-            'parent_sku',
-            'relationship_type',
-            'variation_theme',
-            'product_description',
-            'feed_product_type',
-            'model',
-            'update_delete',
-            'bullet_point1',
-            'bullet_point2',
-            'bullet_point3',
-            'bullet_point4',
-            'bullet_point5',
-            'generic_keywords1',
-            'generic_keywords2',
-            'generic_keywords3',
-            'generic_keywords4',
-            'generic_keywords5',
-            'subject_character',
-            'size_name'
-        ];
+
+        }
+
+
         //   $csv->insertOne(['TemplateType=Offer', 'Version=2014.0703']);
         //        $header = ['item_type','item_sku','external_product_id','external_product_id_type','brand_name','item_name','manufacturer','part_number','color_name','color_map','department_name','standard_price','quanitity','merchant_shipping_group_name','main_image_url','other_image_url1','other_image_url2','other_image_url3','swatch_image_url','main_offer_image','offer_image'];
 //        $header = ['sku', 'price', 'quantity', 'product-id',
@@ -957,7 +968,7 @@ class MWSClient{
         foreach ($MWSProduct as $product) {
     //        print_r($product->toArray());
             $csv->insertOne(
-                array_values($product->toArray())
+                array_values($product->toArray($template))
             );
         }
 
