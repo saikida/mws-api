@@ -1,0 +1,23 @@
+{
+ "name": "saikida/mwsapi",
+ "description": "template type is custom ,csv version is 20180108.",
+"license":"MIT",
+"type": "library",
+"authors": [
+    {
+        "name": "caiweiling",
+        "email": "caiweiling@aliyun.com"
+    }
+],
+"require": {
+    "php": ">= 5.4",
+    "guzzlehttp/guzzle": "~6.0",
+    "spatie/array-to-xml": "^2.1",
+    "league/csv": "^8.1"
+},
+ "autoload": {
+    "psr-4": {
+        "MCS\\": "src"
+    }
+  }
+}
